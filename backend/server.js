@@ -1,11 +1,13 @@
 const express = require("express");
-const port = 5000;
+const port = 5001;
 
 const app = express();
 
-app.get("/post", (req, res) => {
-  res.json({ message: "Voici les données" });
-});
+//middleware qui permet de traiter les données de la request
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use("/post", require("./routes/post.routes"));
 
 //lancer le server
 app.listen(port, () =>
