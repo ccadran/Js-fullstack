@@ -39,14 +39,26 @@ module.exports.deletePost = async (req, res) => {
   res.status(200).json("Post supprimé : " + req.params.id);
 };
 
-module.exports.LikePost = async (req, res) => {
+module.exports.likePost = async (req, res) => {
   try {
     await PostModel.findByIdAndUpdate(
-      req.paramis.id,
-      { $addToSet: { likers: req.body.id } },
+      req.params.id,
+      { $addToSet: { likers: req.body.userId } },
 
       { new: true }
-    );
+    ).then((data) => res.status(200).send(data));
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
+module.exports.dislikePost = async (req, res) => {
+  try {
+    await PostModel.findByIdAndUpdate(
+      req.params.id,
+      { $pull: { likers: req.body.userId } },
+      { new: true }
+    ).then((data) => res.status(200).send(data));
   } catch (err) {
     res.status(400).json(err);
   }
