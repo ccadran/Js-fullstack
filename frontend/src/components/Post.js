@@ -1,4 +1,5 @@
 import React from "react";
+import LikePost from "./LikePost";
 
 const Post = ({ post, userId }) => {
   const dateFormater = (date) => {
@@ -17,6 +18,10 @@ const Post = ({ post, userId }) => {
       <div className="card-header">
         <h3>{post.author}</h3>
         <p>posté le {dateFormater(post.createdAt)}</p>
+      </div>
+      <p>{post.message}</p>
+      <div className="icons-part">
+        <LikePost post={post} userId={userId} />
       </div>
     </div>
   );
