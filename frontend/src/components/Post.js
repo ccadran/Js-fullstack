@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import LikePost from "./LikePost";
 import axios from "axios";
+import DeletePost from "./DeletePost";
 
 const Post = ({ post, userId }) => {
   const [isAuthor, setIsAuthor] = useState(false);
@@ -71,6 +72,7 @@ const Post = ({ post, userId }) => {
             >
               &#10000;
             </span>
+            <DeletePost postId={post._id} />
           </div>
         )}
       </div>
