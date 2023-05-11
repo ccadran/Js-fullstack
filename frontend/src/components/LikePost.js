@@ -11,7 +11,6 @@ const LikePost = ({ post, userId }) => {
     } else {
       setUserLiked(false);
     }
-    console.log(userLiked);
   }, [userId]);
 
   const likePost = () => {
