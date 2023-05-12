@@ -1,9 +1,11 @@
 import axios from "axios";
 import { set } from "mongoose";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-const LikePost = ({ post, userId }) => {
+const LikePost = ({ post }) => {
   const [userLiked, setUserLiked] = useState(false);
+  const userId = useSelector((state) => state.user.userId);
 
   useEffect(() => {
     if (post.likers && post.likers.includes(userId)) {
