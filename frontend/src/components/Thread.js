@@ -8,9 +8,7 @@ const Thread = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.postData);
   useEffect(() => {
-    axios.get("http://localhost:5001/post/").then((res) => {
-      dispatch(getPosts(res.data));
-    });
+    dispatch(getPosts());
   }, []);
 
   return (

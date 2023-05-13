@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createPost, getPosts } from "../feature/post.slice";
 
 const NewPost = () => {
   const [message, setMessage] = useState("");
   const userId = useSelector((state) => state.user.userId);
+  const dispatch = useDispatch();
 
   const handleForm = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5001/post/", {
+
+    const data = {
       message,
       author: userId,
+    };
+    axios.post("http://localhost:5001/post/", data).then(() => {
+      dispatch(createPost(data));
+      //getPosts car il faut aller chercher l'id créer par mongoDB
+      dispatch(getPosts());
     });
 
     setMessage("");
